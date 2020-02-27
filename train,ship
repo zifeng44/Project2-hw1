@@ -1,0 +1,143 @@
+import React, { Component } from "react";
+
+import "./styles.css";
+
+var pages = {
+  start: {
+    text: "Welcome, traveler! How would you like to get to your destination?",
+    image:
+      "https://i.insider.com/5cbf50dfd1a2f8074406a8b2?width=1300&format=jpeg&auto=webp",
+    leftLabel: "Train",
+    rightLabel: "Ship",
+
+    leftPage: "onthetrain",
+    rightPage: "ontheship"
+  },
+  onthetrain: {
+    text: "Welcome  what type of ticket do you have?",
+    image:
+      "https://cdn.vox-cdn.com/thumbor/VMkRZXb-m3yvJvs67egFlPfKno8=/0x0:4000x2250/2070x1164/filters:focal(1680x805:2320x1445):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/65814475/ticket.0.jpg",
+    leftLabel: "first class",
+    rightLabel: "general",
+    leftPage: "first",
+    rightPage: "general"
+  },
+  general: {
+    text: "Do you want a bottle of water?",
+    image:
+      "https://5.imimg.com/data5/SD/JK/MY-10914613/plastic-water-bottle-500x500.jpg",
+    leftLabel: "yes",
+    rightLabel: "no",
+    leftPage: "yeswater",
+    rightPage: "nowater"
+  },
+  first: {
+    text: "Do you want any drinks?",
+    image:
+      "https://www.fifteenspatulas.com/wp-content/uploads/2015/07/Refreshing-Summer-Drinks-Recipes-Fifteen-Spatulas-1-640x960.jpg",
+    leftLabel: "yes",
+    rightLabel: "no",
+    leftPage: "yesdrink",
+    rightPage: "nodrink"
+  },
+  yeswater: {
+    text: "Do you want to open it now?",
+    image:
+      "https://greengroundswell.com/wordpress/wp-content/uploads/2015/01/Hand-Holding-Open-Bottle-of-Bottled-Water.jpg",
+    leftLabel: "yes",
+    rightLabel: "no",
+    leftPage: "yesopen",
+    rightPage: "notopen"
+  },
+  yesopen: {
+    text: "You are a dead man",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/85/Dead.png"
+  },
+  notopen: {
+    text: "Enjoy your ride"
+  },
+  yesdrink: {
+    text: "Do you want to drink it now?",
+    image:
+      "http://www.prolifeworld.com/wp-content/uploads/2019/02/water-1-750x400.jpeg",
+    leftLabel: "yes",
+    rightLabel: "no",
+    leftPage: "yesdrinkit",
+    rightPage: "notdrinkit"
+  },
+
+  ontheship: {
+    text: "Do you really want to get on this ship?",
+    leftLabel: "yes",
+    rightLabel: "no",
+    leftPage: "death",
+    rightPage: "life"
+  },
+
+  death: {
+    text: "You are a dead man",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/85/Dead.png"
+  },
+  life: {
+    text: "Nice choice!"
+  },
+
+  yesdrinkit: {
+    text: "You are a dead man",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/85/Dead.png"
+  },
+  notdrinkit: {
+    text: "Enjoy your ride"
+  }
+};
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      page: "start"
+    };
+  }
+
+  goToPage(pageName) {
+    this.setState({
+      page: pageName
+    });
+  }
+
+  render() {
+    var pageData = pages[this.state.page];
+
+    var imageElement = "";
+    if (pageData.image) {
+      imageElement = <img src={pageData.image} width="200" />;
+    }
+
+    return (
+      <div className="App">
+        <p>
+          {pageData.text}
+          <br />
+          {imageElement}
+        </p>
+        <button onClick={() => this.goToPage(pageData.leftPage)}>
+          {pageData.leftLabel}
+        </button>
+        <button onClick={() => this.goToPage(pageData.rightPage)}>
+          {pageData.rightLabel}
+        </button>
+      </div>
+
+      //<div className="App">
+      //<p>{pageData.text}<br/>{imageElement}</p>
+      //<button onClick={() => this.goToPage(pageData.rightPage)}>
+      //{pageData.rightLabel}
+
+      //</button>
+      //</div>
+    );
+  }
+}
+
+export default App;
